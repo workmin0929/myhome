@@ -35,27 +35,14 @@
 <main class="flex-shrink-0">
     < class="container">
         <h2 class="mt-5">게시판</h2>
-        <div>총 건수 : <span th:text="${#lists.size(boards)}"></span></div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="board : ${boards}">
-                <td th:text="${board.id}"> Mark</td>
-                <td th:text="${board.title}"> Mark</td>
-                <td>홍길동</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="text-end">
-            <button type="button" class="btn btn-primary">쓰기</button>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
 </main>
 
 <!-- Optional JavaScript; choose one of the two! -->
