@@ -19,5 +19,5 @@ public class Board {
     @NotNull
     @Size(min=2, max=30, message = "제목은 2자 이상 30자 이하입니다.")
     private String title;
-    private String Content;
+    private String content;
 }
