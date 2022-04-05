@@ -66,13 +66,13 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'" >
-                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1})}">Previous</a>
+                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1})}">이전</a>
                 </li>
                 <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'disabled'"
                     th:each="i : ${#numbers.sequence(startPage, totalPages)}">
-                    <a class="page-link" th:href="@{/board/list(page=${i - 1})}" th:text="${i}">1</a></li>
+                    <a class="page-link" th:href="@{/board/list(page=${i - 1})}" th:text="${i}"></a></li>
                 <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'" >
-                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber + 1})}">Next</a>
+                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber + 1})}">다음</a>
                 </li>
             </ul>
         </nav>
