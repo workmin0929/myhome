@@ -55,12 +55,15 @@
                 <th scope="col">작성자</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody th:if="${boardsCheck != 'empty'}">
             <tr th:each="board : ${boards}">
                 <td th:text="${board.id}"> Mark</td>
                 <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}"> Mark</a></td>
                 <td>홍길동</td>
             </tr>
+            </tbody>
+            <tbody th:if="${boardsCheck == 'empty'}">
+                <td> 검색 데이터가 없습니다</td>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
@@ -68,7 +71,7 @@
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'" >
                     <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1})}">이전</a>
                 </li>
-                <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'disabled'"
+                <li class="page-item" th:classappend="${i == nowPage + 1} ? 'disabled'"
                     th:each="i : ${#numbers.sequence(startPage, totalPages)}">
                     <a class="page-link" th:href="@{/board/list(page=${i - 1})}" th:text="${i}"></a></li>
                 <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'" >

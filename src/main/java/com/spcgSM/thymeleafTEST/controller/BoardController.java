@@ -33,11 +33,16 @@ public class BoardController {
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
         int startPage = 1;
         int totalPages = boards.getTotalPages();
-        //boards.getPageable().getPageNumber();
+        int nowPage = boards.getPageable().getPageNumber();
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("totalPages", totalPages);
-        model.addAttribute("boards",boards);
+        if(!boards.isEmpty()){
+            model.addAttribute("boards",boards); //검색결과 존재할경우
+        }else{
+            model.addAttribute("boardsCheck","empty");
+        }
+        model.addAttribute("nowPage",nowPage);
         return "board/list";
     }
 

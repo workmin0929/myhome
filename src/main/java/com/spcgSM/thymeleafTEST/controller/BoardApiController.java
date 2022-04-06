@@ -10,6 +10,7 @@ import org.thymeleaf.util.StringUtils;
 
 @RestController
 @RequestMapping("/api")
+//상식!! restcontroller 는 api 를 사용하기 위해서 있는것 ex) json 이나 xml 같이 응답을 주기 위해 있는것
 class BoardApiController {
 
     @Autowired
