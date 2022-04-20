@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu('board')">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Spring Boot SMtest</a>
+        <a class="navbar-brand" href="#">추상민 스프링 게시판</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,7 +40,8 @@
         <form class="row g-3 d-flex justify-content-end" method="GET" th:action="@{/board/list}">
             <div class="col-auto">
                 <label for="searchText" class="visually-hidden">검색</label>
-                <input type="search" class="form-control" id="searchText" name="searchText" placeholder="검색어">
+                <input type="search" class="form-control" id="searchText" name="searchText" placeholder="검색어"
+                       th:value="${param.searchText}">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary mb-3">검색</button>
@@ -57,25 +58,25 @@
             </thead>
             <tbody th:if="${boardsCheck != 'empty'}">
             <tr th:each="board : ${boards}">
-                <td th:text="${board.id}"> Mark</td>
-                <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}"> Mark</a></td>
-                <td>홍길동</td>
+                <td th:text="${board.id}"> val1</td>
+                <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}"> val2</a></td>
+                <td>val3</td>
             </tr>
             </tbody>
-            <tbody th:if="${boardsCheck == 'empty'}">
-                <td> 검색 데이터가 없습니다</td>
+            <tbody class="table_center" th:if="${boardsCheck == 'empty'}">
+                <td colspan="3"> 검색 데이터가 없습니다 </td>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'" >
-                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1})}">이전</a>
+                <li class="page-item" th:classappend="${1 == nowPage + 1} ? 'disabled'" >
+                    <a class="page-link" th:href="@{/board/list(page=${nowPage - 1}, searchText=${param.searchText})}">이전</a>
                 </li>
                 <li class="page-item" th:classappend="${i == nowPage + 1} ? 'disabled'"
                     th:each="i : ${#numbers.sequence(startPage, totalPages)}">
-                    <a class="page-link" th:href="@{/board/list(page=${i - 1})}" th:text="${i}"></a></li>
-                <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'" >
-                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber + 1})}">다음</a>
+                    <a class="page-link" th:href="@{/board/list(page=${i - 1}, searchText=${param.searchText})}" th:text="${i}"></a></li>
+                <li class="page-item" th:classappend="${totalPages == nowPage + 1} ? 'disabled'" >
+                    <a class="page-link" th:href="@{/board/list(page=${nowPage + 1}, searchText=${param.searchText})}">다음</a>
                 </li>
             </ul>
         </nav>

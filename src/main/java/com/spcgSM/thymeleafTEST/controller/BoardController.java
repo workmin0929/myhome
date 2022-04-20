@@ -27,21 +27,23 @@ public class BoardController {
     private BoardValidator boardValidator;
 
     @GetMapping("/list")
-    public String list(Model model, @PageableDefault(size=2) Pageable pageable,
+    public String list(Model model, @PageableDefault(size=10) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String searchText){
         //Page<Board> boards = boardRepository.findAll(pageable);
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
+
         int startPage = 1;
         int totalPages = boards.getTotalPages();
         int nowPage = boards.getPageable().getPageNumber();
+        long resultA = boards.getTotalElements(); // 검색결과 getTotalElements 가 Page의 기능인데 전체 데이터 갯수를 가져온다
 
+        if(resultA == 0){
+            totalPages = startPage;
+            model.addAttribute("boardsCheck","empty"); //검색결과 존재하지 않을경우
+        }
         model.addAttribute("startPage", startPage);
         model.addAttribute("totalPages", totalPages);
-        if(!boards.isEmpty()){
-            model.addAttribute("boards",boards); //검색결과 존재할경우
-        }else{
-            model.addAttribute("boardsCheck","empty");
-        }
+        model.addAttribute("boards",boards);
         model.addAttribute("nowPage",nowPage);
         return "board/list";
     }
